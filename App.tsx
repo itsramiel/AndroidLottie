@@ -1,14 +1,18 @@
 import LottieView from 'lottie-react-native';
-import {Alert, Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {useRef} from 'react';
+import {Button, SafeAreaView, StyleSheet} from 'react-native';
 
 function App() {
+  const ref = useRef<LottieView>(null);
+
   return (
     <SafeAreaView style={styles.screen}>
-      <Button title="Press Me" onPress={() => Alert.alert('Hey!')} />
+      <Button title="play" onPress={() => ref.current?.play()} />
       <LottieView
+        ref={ref}
         style={styles.lottie}
         source={require('./assets/Animation - 1729763779569.json')}
-        autoPlay
+        autoPlay={false}
         loop
       />
     </SafeAreaView>
@@ -21,8 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   lottie: {
-    ...StyleSheet.absoluteFillObject,
-    pointerEvents: 'none',
+    flex: 1,
   },
 });
 
